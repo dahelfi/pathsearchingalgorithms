@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+function dfs(graph, root){
+        let nodes = {}; //wird benutzt um die Distanzen zu speichern
+
+        for (let i = 0; i < graph.length; i++) { //intialisierung von jeden späteren ausgabe wert mit null
+            nodes[i] = {
+                discoveryTime: null,
+                finishingTime: null
+            };
+        }
+        stepsCounter = 0;
+        
+        nodes[root].discoveryTime = 0;
+        let queue = nodes[root];
+
+        while(queue.length != 0){
+            let current = queue.shift();
+
+            let currrentNode = graph[current];
+            let neighborsOfCurrentNode = [];
+            let connectedNodeNumber = currrentNode.indexOf(1);
+          
+
+            while(connectedNodeNumber != -1){//erzeugen von einem Array mit Knoten die mit dem aktuellen Knoten verbunden sind
+        
+                if(nodes[connectedNodeNumber].discoveryTime == null){
+                    nodes[connectedNodeNumber].discoveryTime += stepsCounter;
+                    neighborsOfCurrentNode.push(connectedNodeNumber);
+                }
+         
+                connectedNodeNumber = currrentNode.indexOf(1, connectedNodeNumber  + 1);
+
+            }
+        }
+        
+    }
+
+
+    let BFSGraph = [
+        [0,1,1,1,0,0,0,0,0,0,0,0],
+        [1,0,1,0,1,0,0,0,0,0,0,0],
+        [1,1,0,1,1,0,1,0,0,0,0,0],
+        [1,0,1,0,0,0,1,0,0,0,0,0],
+        [0,1,1,0,0,0,0,1,1,0,1,0],
+        [0,0,0,0,0,0,1,0,0,0,0,0],
+        [0,0,1,1,0,1,0,0,0,1,0,1],
+        [0,0,0,0,1,0,0,0,0,1,1,1],
+        [0,0,0,0,1,0,0,1,0,0,1,0],
+        [0,0,0,0,0,0,1,0,0,0,0,1],
+        [0,0,0,0,1,0,0,1,1,0,0,0],
+        [0,0,0,0,0,0,1,0,0,1,0,0]
+    ]
+
+
+    let BFSGraphShort = [
+        [0,1,0],
+        [0,0,0],
+        [1,0,0],
+       
+    ]
+
+</script>
+<body>
+    
+</body>
+</html>

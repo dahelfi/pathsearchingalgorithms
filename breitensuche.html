@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script>
+
+
+    function bfs(graph, root){
+        let nodesLength = {}; //wird benutzt um die Distanzen zu speichern
+
+        for (let i = 0; i < graph.length; i++) { //intialisierung von jeden späteren ausgabe wert mit null
+            nodesLength[i] = null;
+        }
+
+         nodesLength[root] = 0; //zähler für die Distanz zum Startknoten
+         let queue = [root];  //warteschlange
+
+        while(queue.length != 0){
+            let current = queue.shift(); //entfernt den Wert 
+
+            let currrentNode = graph[current];
+            let neighborsOfCurrentNode = [];
+            let connectedNodeNumber = currrentNode.indexOf(1);
+          
+
+            while(connectedNodeNumber != -1){//erzeugen von einem Array mit Knoten die mit dem aktuellen Knoten verbunden sind
+                neighborsOfCurrentNode.push(connectedNodeNumber);
+                connectedNodeNumber = currrentNode.indexOf(1, connectedNodeNumber  + 1);
+
+            }
+
+            for (let j = 0; j < neighborsOfCurrentNode.length; j++) {// wir gehen durch alle 
+                if(nodesLength[neighborsOfCurrentNode[j]] == null){// wenn der knoten unbesucht war
+                    nodesLength[neighborsOfCurrentNode[j]] = nodesLength[current] + 1; //
+                    queue.push(neighborsOfCurrentNode[j]);//alle knoten die als nachbarn gefunden wurden, werden hinzugefügt
+                }
+                
+            }
+        }
+        return nodesLength;
+    }
+
+    let BFSGraph = [
+        [0,1,1,1,0,0,0,0,0,0,0,0],
+        [1,0,1,0,1,0,0,0,0,0,0,0],
+        [1,1,0,1,1,0,1,0,0,0,0,0],
+        [1,0,1,0,0,0,1,0,0,0,0,0],
+        [0,1,1,0,0,0,0,1,1,0,1,0],
+        [0,0,0,0,0,0,1,0,0,0,0,0],
+        [0,0,1,1,0,1,0,0,0,1,0,1],
+        [0,0,0,0,1,0,0,0,0,1,1,1],
+        [0,0,0,0,1,0,0,1,0,0,1,0],
+        [0,0,0,0,0,0,1,0,0,0,0,1],
+        [0,0,0,0,1,0,0,1,1,0,0,0],
+        [0,0,0,0,0,0,1,0,0,1,0,0]
+    ]
+    
+    let BFSGraphShort = [
+        [0,1,0],
+        [0,0,0],
+        [1,0,0],
+       
+    ]
+
+  
+
+</script>
+<body>
+    
+</body>
+</html>
